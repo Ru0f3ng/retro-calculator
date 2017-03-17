@@ -70,6 +70,17 @@ class ViewController: UIViewController {
         processOperation(operation: currentOperation)
     }
     
+    @IBAction func onClearPressed(sender: UIButton) {
+        playSound()
+        
+        leftValueString = ""
+        rightValueString = ""
+        result = ""
+        currentOperation = Operation.Empty
+        runningNumber = ""
+        outputLabel.text = "0"
+    }
+    
     func playSound() {
         if btnSound.isPlaying {
             btnSound.stop()
@@ -80,9 +91,9 @@ class ViewController: UIViewController {
     func processOperation(operation: Operation) {
         playSound()
         
-        if currentOperation != Operation.Empty {
+        if runningNumber != "" {
             
-            if runningNumber != "" {
+            if currentOperation != Operation.Empty {
                 rightValueString = runningNumber
                 runningNumber = ""
                 
@@ -99,7 +110,6 @@ class ViewController: UIViewController {
                 leftValueString = result
                 outputLabel.text = result
             }
-            currentOperation = operation
         } else {
             leftValueString = runningNumber
             runningNumber = ""
